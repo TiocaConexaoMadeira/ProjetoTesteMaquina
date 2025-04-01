@@ -2,6 +2,8 @@
 using ProjetoTeste.Model.Cadastro;
 using System.Collections.Generic;
 using ProjetoTeste.Repositories.Cadastros;
+using ProjetoTeste.DTO.Cadastros;
+using System.Threading.Tasks;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -40,13 +42,17 @@ public class MaquinasController : ControllerBase
     /// Cadastrar uma Maquina
     /// </summary>
     [HttpPost]
-    public ActionResult Cadastrar([FromBody] Maquina maquina)
+    public ActionResult Cadastrar([FromBody] MaquinaCadastrarDTO maquinaDTO)
     {
-        if (maquina == null)
-            return BadRequest("Dados inválidos.");
+        MaquinaCadastrar maquinaCadastrar = new MaquinaCadastrar
+        {
+            Nome = maquinaDTO.Nome,
+            Descricao = maquinaDTO.Descricao,
+            Ativa = maquinaDTO.Ativa
+        };
 
-        _repository.Cadastrar(maquina);
-        return CreatedAtAction(nameof(PorCodigo), new { codigo = maquina.Codigo }, maquina);
+        _repository.Cadastrar(maquinaCadastrar);
+        return Ok("Máquina cadastrada com sucesso!");
     }
 
     /// <summary>

@@ -45,7 +45,7 @@ public class MaquinasController : ControllerBase
     public ActionResult Cadastrar([FromBody] MaquinaCadastrarDTO maquinaDTO)
     {
         MaquinaCadastrar maquinaCadastrar = new MaquinaCadastrar
-        {
+        {            
             Nome = maquinaDTO.Nome,
             Descricao = maquinaDTO.Descricao,
             Ativa = maquinaDTO.Ativa
@@ -59,12 +59,19 @@ public class MaquinasController : ControllerBase
     /// Alterar uma Maquina
     /// </summary>
     [HttpPut("{codigo}")]
-    public ActionResult Alterar(int codigo, [FromBody] Maquina novaMaquina)
+    public ActionResult Alterar(int codigo, [FromBody] MaquinaAlterarDTO maquinaAlterarDTO)
     {
-        if (novaMaquina == null)
+        if (maquinaAlterarDTO == null)
             return BadRequest("Dados inválidos.");
 
-        bool alterado = _repository.Alterar(codigo, novaMaquina);
+        MaquinaAlterar maquinaAlterar = new MaquinaAlterar
+        {           
+            Nome = maquinaAlterarDTO.Nome,
+            Descricao = maquinaAlterarDTO.Descricao,
+            Ativa = maquinaAlterarDTO.Ativa
+        };
+
+        bool alterado = _repository.Alterar(codigo, maquinaAlterar);
         if (!alterado)
             return NotFound("Máquina não encontrada.");
 

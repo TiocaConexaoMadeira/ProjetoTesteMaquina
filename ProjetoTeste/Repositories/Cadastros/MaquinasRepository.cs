@@ -36,12 +36,19 @@ namespace ProjetoTeste.Repositories.Cadastros
             maquinas.Add(maquina);
         }
 
-        public bool Alterar(int codigo, Maquina novaMaquina)
+        public bool Alterar(int codigo, MaquinaAlterar maquinaAlterar)
         {
             var index = maquinas.FindIndex(m => m.Codigo == codigo);
             if (index != -1)
             {
-                maquinas[index] = novaMaquina;
+                var maquina = new Maquina
+                {
+                    Codigo = maquinaAlterar.Codigo,
+                    Nome = maquinaAlterar.Nome,
+                    Descricao = maquinaAlterar.Descricao,
+                    Ativa = maquinaAlterar.Ativa
+                };
+                maquinas[index] = maquina;
                 return true;
             }
             return false;

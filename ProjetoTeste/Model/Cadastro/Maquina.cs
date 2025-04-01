@@ -27,4 +27,12 @@ public class MaquinaCadastrar
         public bool Ativa { get; set; }
     }
 
+    public class MaquinaAlterar
+    {
+        public int Codigo { get; set; }
+        public string Nome { get; set; } = string.Empty;
+        public string? Descricao { get; set; }
+        public bool Ativa { get; set; }
+    }
+
 }

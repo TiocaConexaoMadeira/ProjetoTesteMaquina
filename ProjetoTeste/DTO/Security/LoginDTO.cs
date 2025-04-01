@@ -16,15 +16,5 @@ namespace ProjetoTeste.DTO.Security
             Usuario = usuario;
             Senha = senha;
         }
-
-        //teste (não sei se é necessário definir aqui tbm)
-        public static List<LoginDTO> GetUsuarios()
-        {
-            return new List<LoginDTO>
-                {
-                    new LoginDTO("admin", "admin"),
-                    new LoginDTO("teste", "teste")
-                };
-        }
     }
 }

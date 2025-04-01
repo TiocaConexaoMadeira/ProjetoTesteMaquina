@@ -12,7 +12,6 @@ namespace ProjetoTeste.Model.Security
         [MinLength(1), MaxLength(100)]
         public string Senha { get; set; } = string.Empty;
 
-
         public Login(string usuario, string senha)
         {
             Usuario = usuario;

@@ -6,7 +6,11 @@ namespace ProjetoTeste.Model.Cadastro
 { 
 public class Maquina
 {
+    [Key]
+    [Column("Codigo")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Codigo { get; set; }
+    [Required]
     public string Nome { get; set; } = string.Empty;
     public string? Descricao { get; set; }
     public bool Ativa { get; set; }

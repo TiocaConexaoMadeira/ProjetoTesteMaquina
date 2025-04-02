@@ -12,6 +12,8 @@ using ProjetoTeste.Repositories.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using ProjetoTeste.Services;
+using Microsoft.EntityFrameworkCore;
+using ProjetoTeste.Infra.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,8 +39,15 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Conectando a DB
+builder.Services.AddDbContext<ProjetoTesteContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 // Adiciona o serviço do repositório (injeção de dependência)
-builder.Services.AddSingleton<MaquinasRepository>();
+//builder.Services.AddSingleton<MaquinasRepository>();
+builder.Services.AddScoped<MaquinasRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

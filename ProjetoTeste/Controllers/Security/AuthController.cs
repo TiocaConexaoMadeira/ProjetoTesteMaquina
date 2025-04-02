@@ -24,10 +24,10 @@ namespace ProjetoTeste.Controllers.Security
             _configuration = configuration;
         }
 
+
         /// <summary>
         /// Rota anônima para realizar o login
         /// </summary>
-        [AllowAnonymous]
         [HttpPost("Login")]
         public IActionResult Login([FromBody] LoginDTO login)
         {

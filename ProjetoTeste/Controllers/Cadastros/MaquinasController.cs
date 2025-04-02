@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ProjetoTeste.Repositories.Cadastros;
 using ProjetoTeste.DTO.Cadastros;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -19,6 +20,7 @@ public class MaquinasController : ControllerBase
     /// <summary>
     /// Consulta das Maquinas Ativas
     /// </summary>
+    [Authorize]
     [HttpGet]
     public ActionResult<List<Maquina>> GetAtivas()
     {
@@ -28,6 +30,7 @@ public class MaquinasController : ControllerBase
     /// <summary>
     /// Consulta Maquinas por código
     /// </summary>
+    [Authorize]
     [HttpGet("{codigo}")]
     public ActionResult<Maquina> PorCodigo(int codigo)
     {
@@ -41,6 +44,7 @@ public class MaquinasController : ControllerBase
     /// <summary>
     /// Cadastrar uma Maquina
     /// </summary>
+    [Authorize]
     [HttpPost]
     public ActionResult Cadastrar([FromBody] MaquinaCadastrarDTO maquinaDTO)
     {
@@ -58,6 +62,7 @@ public class MaquinasController : ControllerBase
     /// <summary>
     /// Alterar uma Maquina
     /// </summary>
+    [Authorize]
     [HttpPut("{codigo}")]
     public ActionResult Alterar(int codigo, [FromBody] MaquinaAlterarDTO maquinaAlterarDTO)
     {
@@ -81,6 +86,7 @@ public class MaquinasController : ControllerBase
     /// <summary>
     /// Remove uma máquina pelo código
     /// </summary>
+    [Authorize]
     [HttpDelete("{codigo}")]
     public ActionResult Deletar(int codigo)
     {

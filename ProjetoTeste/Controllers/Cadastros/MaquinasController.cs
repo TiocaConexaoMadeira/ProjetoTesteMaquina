@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 [Route("api/[controller]")]
 [ApiController]
+[AllowAnonymous]
 public class MaquinasController : ControllerBase
 {
     private readonly MaquinasRepository _repository;
@@ -21,7 +22,7 @@ public class MaquinasController : ControllerBase
     /// <summary>
     /// Consulta das Maquinas Ativas
     /// </summary>
-    //[Authorize]
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Maquina>>> GetAtivas()
     {
@@ -35,7 +36,7 @@ public class MaquinasController : ControllerBase
     /// <summary>
     /// Consulta Maquinas por código
     /// </summary>
-    //[Authorize]
+    [Authorize]
     [HttpGet("{codigo}")]
     public async Task<ActionResult<Maquina>> PorCodigo(int codigo)
     {
@@ -57,12 +58,20 @@ public class MaquinasController : ControllerBase
     /// <summary>
     /// Cadastrar uma Maquina
     /// </summary>
-    //[Authorize]
+    [Authorize]
     [HttpPost]
-    public async Task<ActionResult> Cadastrar([FromBody] Maquina maquina)
+    public async Task<ActionResult> Cadastrar([FromBody] MaquinaCadastrarDTO maquinaDTO)
     {
+        var maquina = new Maquina
+        {
+            Nome = maquinaDTO.Nome,
+            Descricao = maquinaDTO.Descricao,
+            Ativa = maquinaDTO.Ativa,
+            Codigo = maquinaDTO.Codigo
+        };
+
         await _repository.Cadastrar(maquina);
-        return CreatedAtAction(nameof(Maquina), new { id = maquina.Codigo }, maquina);
+        return CreatedAtAction(nameof(PorCodigo), new { codigo = maquina.Codigo }, maquina);
     }
 
     //public ActionResult Cadastrar([FromBody] MaquinaCadastrarDTO maquinaDTO)
@@ -81,12 +90,20 @@ public class MaquinasController : ControllerBase
     /// <summary>
     /// Alterar uma Maquina
     /// </summary>
-    //[Authorize]
+    [Authorize]
     [HttpPut("{codigo}")]
-    public async Task<ActionResult> Alterar(int codigo, [FromBody] Maquina maquina)
+    public async Task<ActionResult> Alterar(int codigo, [FromBody] MaquinaAlterarDTO maquinaAlterarDTO)
     {
-        if (codigo != maquina.Codigo)
+        if (codigo != maquinaAlterarDTO.Codigo)
             return BadRequest("Dados inválidos");
+
+        var maquina = new Maquina
+        {
+            Nome = maquinaAlterarDTO.Nome,
+            Descricao = maquinaAlterarDTO.Descricao,
+            Ativa = maquinaAlterarDTO.Ativa,
+            Codigo = maquinaAlterarDTO.Codigo
+        };
 
         await _repository.Alterar(maquina);
         return NoContent();
@@ -114,7 +131,7 @@ public class MaquinasController : ControllerBase
     /// <summary>
     /// Remove uma máquina pelo código
     /// </summary>
-    //[Authorize]
+    [Authorize]
     [HttpDelete("{codigo}")]
     public async Task<ActionResult> Deletar(int codigo)
     {

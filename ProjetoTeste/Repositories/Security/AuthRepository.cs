@@ -1,4 +1,5 @@
-﻿using ProjetoTeste.DTO.Security;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoTeste.DTO.Security;
 using ProjetoTeste.Infra.Database;
 using ProjetoTeste.Model.Security;
 using System.Collections.Generic;
@@ -14,14 +15,20 @@ namespace ProjetoTeste.Repositories.Security
         public AuthRepository(ProjetoTesteContext context)
         {
             _context = context;
+
+            //_usuarios = new List<Login>
+            //{
+            //    new Login("1", "admin", "admin"),
+            //    new Login("teste", "teste")
+            //};
         }
 
-        public Login ConsultaPeloLogin(string usuario, string senha)
+        public Login ConsultaPeloLogin(int id, string usuario, string senha)
         {
-            return _context.Usuarios.FirstOrDefault(u => u.Usuario == usuario && u.Senha == senha);
+            return _context.usuarios.FirstOrDefault(u => u.Usuario == usuario && u.Senha == senha);
         }
 
-        //private readonly List<Login> _usuarios;
+        private readonly List<Login> _usuarios;
 
         //public AuthRepository()
         //{

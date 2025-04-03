@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetoTeste.Infra.Database;
-using ProjetoTeste.Model.Cadastro;
+using ProjetoTeste.Model;
 using System;
 
 
-namespace ProjetoTeste.Repositories.Cadastros
+namespace ProjetoTeste.Repositories
 {
     public class LancamentosRepository
     {
@@ -18,10 +18,6 @@ namespace ProjetoTeste.Repositories.Cadastros
         public async Task<Lancamento> Cadastrar(Lancamento lancamento)
         {
             var maquina = await _context.maquinas.FirstOrDefaultAsync(m => m.Codigo == lancamento.CodigoMaquina);
-            if (maquina == null)
-            {
-                throw new KeyNotFoundException("Máquina não encontrada.");
-            }
 
             lancamento.CodigoMaquina = maquina.Codigo; 
 

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProjetoTeste.Model.Cadastro
+namespace ProjetoTeste.Model
 {
     public class Lancamento
     {

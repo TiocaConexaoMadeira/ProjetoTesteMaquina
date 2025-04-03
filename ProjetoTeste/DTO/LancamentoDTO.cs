@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProjetoTeste.DTO.Cadastros
+namespace ProjetoTeste.DTO
 {
     public class LancamentoDTO
     {

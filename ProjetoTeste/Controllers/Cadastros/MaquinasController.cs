@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 [Route("api/[controller]")]
 [ApiController]
-[AllowAnonymous]
+///[AllowAnonymous]
 public class MaquinasController : ControllerBase
 {
     private readonly MaquinasRepository _repository;

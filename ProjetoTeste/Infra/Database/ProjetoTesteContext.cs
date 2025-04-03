@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjetoTeste.Model;
 using ProjetoTeste.Model.Cadastro;
 using ProjetoTeste.Model.Security;
 using System.Reflection;

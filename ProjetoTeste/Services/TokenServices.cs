@@ -29,6 +29,7 @@ namespace ProjetoTeste.Services
 
             //gera uma chave com base em um algoritmo simetrico
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:key"]));
+
             //gera a assinatura digital do token usando o algoritmo Hmac e a chave privada
             var credenciais = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

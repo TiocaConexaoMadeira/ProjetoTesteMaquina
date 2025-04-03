@@ -9,21 +9,25 @@ namespace ProjetoTeste.Infra.Database
     {
         public ProjetoTesteContext(DbContextOptions<ProjetoTesteContext> options) : base(options) { }
 
-        public DbSet<Maquina> maquinas { get; set; } // Ajuste conforme suas entidades
+        public DbSet<Maquina> maquinas { get; set; }
         public DbSet<Login> usuarios { get; set; }
+        public DbSet<Lancamento> lancamentos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            //modelBuilder.HasDefaultSchema("public"); // Use o schema correto do seu banco
 
             modelBuilder.Entity<Maquina>()
                 .ToTable("maquinas") // Define explicitamente a tabela
                 .HasKey(m => m.Codigo);
 
             modelBuilder.Entity<Login>()
-                .ToTable("usuarios") // Define explicitamente a tabela
+                .ToTable("usuarios") 
                 .HasKey(i => i.Id);
+
+            modelBuilder.Entity<Lancamento>()
+                .ToTable("lancamentos") 
+                .HasKey(l => l.Codigo);
         }
     }
 }

@@ -108,8 +108,9 @@ builder.Services.AddDbContext<ProjetoTesteContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Adiciona o serviço do repositório (injeção de dependência)
-//builder.Services.AddSingleton<MaquinasRepository>();
 builder.Services.AddScoped<MaquinasRepository>();
+// Adiciona o serviço do repositório (injeção de dependência)
+builder.Services.AddScoped<LancamentosRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

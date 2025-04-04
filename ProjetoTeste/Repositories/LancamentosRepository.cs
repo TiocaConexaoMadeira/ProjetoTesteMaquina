@@ -17,10 +17,6 @@ namespace ProjetoTeste.Repositories
 
         public async Task<Lancamento> Cadastrar(Lancamento lancamento)
         {
-            var maquina = await _context.maquinas.FirstOrDefaultAsync(m => m.Codigo == lancamento.CodigoMaquina);
-
-            lancamento.CodigoMaquina = maquina.Codigo; 
-
             _context.lancamentos.Add(lancamento);
             await _context.SaveChangesAsync();
             return lancamento;

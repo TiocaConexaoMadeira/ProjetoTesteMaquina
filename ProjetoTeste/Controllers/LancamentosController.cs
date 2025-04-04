@@ -34,7 +34,7 @@ namespace ProjetoTeste.Controllers
             {
                 var maquina = await _maquinasRepository.ConsultaPorCodigo(lancamentoDTO.CodigoMaquina);
                 if (maquina == null)
-                    return NotFound(new { message = "Máquina não encontrada." });
+                    return NotFound("Máquina não encontrada.");
 
                 // Obtém o ID do usuário a partir do JWT
                 var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
@@ -126,7 +126,7 @@ namespace ProjetoTeste.Controllers
         /// Consulta de item por código
         /// </summary>
         [Authorize]
-        [HttpGet("com-itens/{codigo}")]
+        [HttpGet("{codigo}/item")]
         public async Task<IActionResult> ConsultarPorCodigoComItens(int codigo)
         {
             try

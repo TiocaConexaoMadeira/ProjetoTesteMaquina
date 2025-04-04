@@ -43,7 +43,6 @@ namespace ProjetoTeste.Model
         [Required]
         [Column("unidade")]
         public string Unidade { get; set; } = string.Empty;
-        public Lancamento Lancamento { get; set; } = null!;
     }
 }
 

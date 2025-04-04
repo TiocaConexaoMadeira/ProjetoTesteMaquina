@@ -31,5 +31,20 @@ namespace ProjetoTeste.Repositories
         {
             return await _context.lancamentos.FirstOrDefaultAsync(l => l.Codigo == codigo);
         }
+
+        public async Task CadastrarItens(List<LancamentoItem> itens)
+        {
+            await _context.LancamentosItens.AddRangeAsync(itens);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Lancamento?> ConsultarPorCodigoComItens(int codigo)
+        {
+            var lancamento = await _context.lancamentos
+                .Include(l => l.Itens)
+                .FirstOrDefaultAsync(l => l.Codigo == codigo);
+
+            return lancamento;
+        }
     }
 }
